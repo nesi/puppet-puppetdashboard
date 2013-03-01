@@ -1,6 +1,39 @@
 # Puppet Dashboard
 
-A Puppet module (`puppetdashboard`) for installing the Puppet Dashboard web interface
+A Puppet module (`puppetdashboard`) for installing the [Puppet Dashboard](https://puppetlabs.com/puppet/related-projects/dashboard/) web interface, using [Passenger](https://www.phusionpassenger.com/) and [Apache](http://httpd.apache.org/).
+
+# To install into puppet
+
+Clone `puppetdashboard` into your puppet configuration in your `puppet/modules` directory:
+
+	# git clone git://github.com/nesi/puppet-puppetdashboard.git puppet
+
+Or if you're managing your Puppet configuration with git, in your `puppet` configuration directory:
+
+	# git submodule add git://github.com/nesi/puppet-puppetdashboard.git modules/puppet --init --recursive
+	# cd modules/puppetdashboard
+	# git checkout master
+	# git pull
+	# cd ../..
+	# git commit -m "added puppetdashboard submodule from https://github.com/nesi/puppet-puppetdashboard"
+
+It might seem bit excessive, but it will make sure the submodule isn't headless...
+
+# Dependencies
+
+This module depends on the following Puppet modules:
+
+* [Apache][1], currently requires the [nesi-apache][2] fork, and depends on:
+	* [stdlib][3]
+	* [firewall][4]
+	* [concat][5]
+
+[1]:https://github.com/hunner/puppetlabs-apache
+[2]:https://github.com/nesi/puppetlabs-apache/tree/dynaguppy_hunner
+[3]:https://github.com/puppetlabs/puppetlabs-stdlib
+[4]:https://github.com/puppetlabs/puppetlabs-firewall
+[5]:https://github.com/puppetlabs/puppetlabs-concat
+
 
 # References
 
