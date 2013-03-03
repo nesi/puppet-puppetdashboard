@@ -21,7 +21,8 @@ class puppetdashboard::install(
   user{$user:
     ensure      => present,
     home        => $user_home,
-    groups      => [$group,$apache::params::group],
+    gid         => $group,
+    groups      => [$apache::params::group],
     managehome  => true,
   }
 
@@ -30,9 +31,12 @@ class puppetdashboard::install(
     owner   => $user,
     group   => $apache::params::group,
     recurse => true,
+    require => [User[$user],Group[$apache::params::group]],
   }
 
-  git::user{$user: }
+  git::user{$user:
+    require => User[$user],
+  }
 
   git::repo{'puppet-dashboard':
     path    => $app_dir,
