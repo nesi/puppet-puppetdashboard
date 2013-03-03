@@ -6,16 +6,16 @@ A Puppet module (`puppetdashboard`) for installing the [Puppet Dashboard](https:
 
 Clone `puppetdashboard` into your puppet configuration in your `puppet/modules` directory:
 
-	# git clone git://github.com/nesi/puppet-puppetdashboard.git puppet
+  # git clone git://github.com/nesi/puppet-puppetdashboard.git puppet
 
 Or if you're managing your Puppet configuration with git, in your `puppet` configuration directory:
 
-	# git submodule add git://github.com/nesi/puppet-puppetdashboard.git modules/puppet --init --recursive
-	# cd modules/puppetdashboard
-	# git checkout master
-	# git pull
-	# cd ../..
-	# git commit -m "added puppetdashboard submodule from https://github.com/nesi/puppet-puppetdashboard"
+  # git submodule add git://github.com/nesi/puppet-puppetdashboard.git modules/puppet --init --recursive
+  # cd modules/puppetdashboard
+  # git checkout master
+  # git pull
+  # cd ../..
+  # git commit -m "added puppetdashboard submodule from https://github.com/nesi/puppet-puppetdashboard"
 
 It might seem bit excessive, but it will make sure the submodule isn't headless...
 
@@ -24,19 +24,24 @@ It might seem bit excessive, but it will make sure the submodule isn't headless.
 This module depends on the following Puppet modules:
 
 * [Apache][1], currently requires the [nesi-apache][2] fork, and depends on:
-	* [stdlib][3]
-	* [firewall][4]
-	* [concat][5]
+  * [stdlib][3]
+  * [firewall][4]
+  * [concat][5]
+  * [Ruby][6]
+  * [git][7]
 
 [1]:https://github.com/hunner/puppetlabs-apache
 [2]:https://github.com/nesi/puppetlabs-apache/tree/dynaguppy_hunner
 [3]:https://github.com/puppetlabs/puppetlabs-stdlib
 [4]:https://github.com/puppetlabs/puppetlabs-firewall
 [5]:https://github.com/puppetlabs/puppetlabs-concat
+[6]:https://github.com/puppetlabs/puppetlabs-ruby
+[7]:https://github.com/nesi/puppet-git
 
 
 # References
 
+* http://docs.puppetlabs.com/dashboard/manual/1.2/bootstrapping.html
 * http://berndadamowicz.wordpress.com/2011/12/07/keeping-puppet-dashboards-database-small/
 * http://docs.puppetlabs.com/dashboard/passenger.html
 * http://keymon.wordpress.com/2010/09/20/setting-puppetmaster-and-puppet-dashboard-with-passenger-in-a-debian-apache-server-using-puppet-user/
