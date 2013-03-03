@@ -35,9 +35,7 @@ class puppetdashboard(
   $group      = $puppetdashboard::params::group,
   $git_source = $puppetdashboard::params::git_source,
   $git_branch = undef
-){
-
-  include puppetdashboard::params
+) inherits puppetdashboard::params {
 
   # Require dependencies than must be on the dashboard web server
   require apache
