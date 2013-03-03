@@ -9,6 +9,7 @@ class puppetdashboard::install(
   $git_source,
   $git_branch
 ){
+
   # Installing from the PuppetLabs package repository would be easy
   # BUT would set up Puppet Dashboard to use WEBrick, which would require
   # disabling and purging WEBrick. Let's not do that, let's use git!
@@ -20,7 +21,7 @@ class puppetdashboard::install(
   user{$user:
     ensure      => present,
     home        => $user_home,
-    groups      => [$group,$apache::params::group]
+    groups      => [$group,$apache::params::group],
     managehome  => true,
   }
 

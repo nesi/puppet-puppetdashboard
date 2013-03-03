@@ -1,4 +1,4 @@
-class puppetdashboard::params {
+class puppetdashboard::params{
   $app_dir    = '/usr/share/puppet/puppet-dashboard'
   $user       = 'puppet-dashboard'
   $user_home  = "/home/${user}"

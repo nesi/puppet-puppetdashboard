@@ -35,7 +35,7 @@ class puppetdashboard(
   $group      = $puppetdashboard::params::group,
   $git_source = $puppetdashboard::params::git_source,
   $git_branch = undef
-) {
+){
 
   include puppetdashboard::params
 
