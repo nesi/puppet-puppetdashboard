@@ -7,7 +7,11 @@ class puppetdashboard::install(
   $user_home,
   $group,
   $git_source,
-  $git_branch
+  $git_branch,
+  $db_host,
+  $database,
+  $db_user,
+  $db_password
 ){
 
   # Installing from the PuppetLabs package repository would be easy
@@ -31,6 +35,7 @@ class puppetdashboard::install(
     owner   => $user,
     group   => $apache::params::group,
     recurse => true,
+    ignore  => ['.git'],
     require => [User[$user],Group[$apache::params::group]],
   }
 
@@ -43,6 +48,19 @@ class puppetdashboard::install(
     source  => $git_source,
     branch  => $git_branch,
     owner   => $user,
+  }
+
+  if $db_host {
+    $real_db_host = $db_host
+  } else {
+    $real_db_host = 'localhost'
+  }
+
+  mysql::db {$database:
+    user      => $db_user,
+    password  => $db_password,
+    host      => $real_db_host,
+    grant     => ['all'],
   }
 
 }

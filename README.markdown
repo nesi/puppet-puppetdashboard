@@ -23,12 +23,18 @@ It might seem bit excessive, but it will make sure the submodule isn't headless.
 
 This module depends on the following Puppet modules:
 
+* [stdlib][3]
 * [Apache][1], currently requires the [nesi-apache][2] fork, and depends on:
-  * [stdlib][3]
   * [firewall][4]
   * [concat][5]
   * [Ruby][6]
   * [git][7]
+  
+## Optional dependencies
+
+These dependencies may be required depending on how the `puppetdashboard` module is used:
+
+* [MySQL][8] is a remote dependency, i.e. the server specified in the `db_host` parameter must be configured with the Puppetlabs MySQL puppet module.
 
 [1]:https://github.com/hunner/puppetlabs-apache
 [2]:https://github.com/nesi/puppetlabs-apache/tree/dynaguppy_hunner
@@ -37,7 +43,7 @@ This module depends on the following Puppet modules:
 [5]:https://github.com/puppetlabs/puppetlabs-concat
 [6]:https://github.com/puppetlabs/puppetlabs-ruby
 [7]:https://github.com/nesi/puppet-git
-
+[8]:https://github.com/puppetlabs/puppetlabs-mysql
 
 # References
 

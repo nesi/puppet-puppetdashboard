@@ -3,7 +3,16 @@
 # This module manages the Puppet Dashboard web interface
 #
 # Parameters:
-# $app_dir  The root directory for the Puppet Dashboard web application
+# $app_dir    The root directory for the Puppet Dashboard web application
+# $user       The user puppet-dashboard will run as
+# $user_home  The user's home directory
+# $group      The user's primary group
+# $git_source The git source URL for obtaining the Puppet Dashboard
+# $git_branch The branch of the git repository for the Puppet Dashboard source
+# $db_host    The database server hosting the dashboard databse
+# $database   The name for the dashboard database
+# $db_user    The user name to access the dashboard database
+# $db_password The db_user's password, default is 'a very unsafe password'
 #
 # Actions:
 #
@@ -29,12 +38,16 @@
 
 # [Remember: No empty lines between comments and class definition]
 class puppetdashboard(
-  $app_dir    = $puppetdashboard::params::app_dir,
-  $user       = $puppetdashboard::params::user,
-  $user_home  = $puppetdashboard::params::user_home,
-  $group      = $puppetdashboard::params::group,
-  $git_source = $puppetdashboard::params::git_source,
-  $git_branch = undef
+  $app_dir          = $puppetdashboard::params::app_dir,
+  $user             = $puppetdashboard::params::user,
+  $user_home        = $puppetdashboard::params::user_home,
+  $group            = $puppetdashboard::params::group,
+  $git_source       = $puppetdashboard::params::git_source,
+  $git_branch       = undef,
+  $db_host          = undef,
+  $database         = 'dashboard',
+  $db_user          = 'dashboard',
+  $db_password      = 'a very unsafe password'
 ) inherits puppetdashboard::params {
 
   # Require dependencies than must be on the dashboard web server
@@ -48,17 +61,22 @@ class puppetdashboard(
   # NOTE: ruby-mysl not required (yet) to allow selection of another database library
 
   # Parameter validation should go here
+  validate_bool($manage_local_db)
 
   # Install Puppet Dashboard
   case $::operatingsystem{
     Ubuntu:{
       class { puppetdashboard::install:
-        app_dir     => $app_dir,
-        user        => $user,
-        user_home   => $user_home,
-        group       => $group,
-        git_source  => $git_source,
-        git_branch  => $git_branch,
+        app_dir         => $app_dir,
+        user            => $user,
+        user_home       => $user_home,
+        group           => $group,
+        git_source      => $git_source,
+        git_branch      => $git_branch,
+        db_host         => $db_host,
+        database        => $database,
+        db_user         => $db_user,
+        db_password     => $db_password,
       }
     }
     default:{
