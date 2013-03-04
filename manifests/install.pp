@@ -11,7 +11,8 @@ class puppetdashboard::install(
   $db_host,
   $database,
   $db_user,
-  $db_password
+  $db_password,
+  $db_config
 ){
 
   # Installing from the PuppetLabs package repository would be easy
@@ -61,6 +62,14 @@ class puppetdashboard::install(
     password  => $db_password,
     host      => $real_db_host,
     grant     => ['all'],
+  }
+
+  file{$db_config:
+    ensure  => file,
+    owner   => $user,
+    group   => $apache::params::group,
+    mode    => 660,
+    content => template('/puppetdashboard/config/database.yml.erb'),
   }
 
 }

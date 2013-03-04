@@ -45,6 +45,24 @@ These dependencies may be required depending on how the `puppetdashboard` module
 [7]:https://github.com/nesi/puppet-git
 [8]:https://github.com/puppetlabs/puppetlabs-mysql
 
+# The Puppet Dashboard database
+
+The Puppet Dashboard currently can only use the MySQL database, but does support using a remote database, so the module refers to, but does not configure a MySQL database.
+
+A database server needs to be set up usint the `mysql` puppet module with the following snippet:
+
+```
+class{'mysql': }
+class{'mysql::server':
+  config_hash => {
+    'root_password'       => $mysql_root_password,
+    'max_allowed_packet'  => '32M',
+  }
+}
+```
+
+From there, the module will create the database specified by the `database` parameter with the `db_user` and `db_password` parameters to access it.
+
 # References
 
 * http://docs.puppetlabs.com/dashboard/manual/1.2/bootstrapping.html

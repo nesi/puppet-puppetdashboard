@@ -47,7 +47,8 @@ class puppetdashboard(
   $db_host          = undef,
   $database         = 'dashboard',
   $db_user          = 'dashboard',
-  $db_password      = 'a very unsafe password'
+  $db_password      = 'a very unsafe password',
+  $db_config        = $puppetdashboard::params::db_config
 ) inherits puppetdashboard::params {
 
   # Require dependencies than must be on the dashboard web server
@@ -61,7 +62,6 @@ class puppetdashboard(
   # NOTE: ruby-mysl not required (yet) to allow selection of another database library
 
   # Parameter validation should go here
-  validate_bool($manage_local_db)
 
   # Install Puppet Dashboard
   case $::operatingsystem{
@@ -77,6 +77,7 @@ class puppetdashboard(
         database        => $database,
         db_user         => $db_user,
         db_password     => $db_password,
+        db_config       => $db_config,
       }
     }
     default:{
